@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@allinone_reborn</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+    .header {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 20px 0;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(0, 200, 255, 0.6);
+    }
+    .buttons-row{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:15px 0;
+    }
+    .btn{
+      padding:12px 30px;
+      font-size:1rem;
+      border:none;
+      border-radius:12px;
+      background:rgba(255,255,255,0.1);
+      color:#fff;
+      cursor:pointer;
+      transition:all .3s;
+      backdrop-filter:blur(8px);
+    }
+    .btn.active,.btn:hover{
+      background:linear-gradient(90deg,#00c6ff,#0072ff);
+      box-shadow:0 0 15px rgba(0,200,255,.6);
+      transform:translateY(-2px);
+    }
+    .player{
+      margin-top:20px;
+      width:95%;
+      max-width:650px;
+      aspect-ratio:16/9;
+      border-radius:15px;
+      overflow:hidden;
+      border:2px solid rgba(0,200,255,.5);
+      box-shadow:0 0 25px rgba(0,200,255,.3);
+    }
+    iframe{width:100%;height:100%;border:none;}
+    .banner-ads{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:2px;
+    }
+    .telegram{
+      position:fixed;bottom:25px;right:25px;z-index:999;
+    }
+    .telegram a{
+      display:flex;align-items:center;gap:10px;
+      background:linear-gradient(135deg,#00c6ff,#0072ff);
+      padding:14px 22px;border-radius:50px;color:#fff;
+      text-decoration:none;font-weight:600;font-size:1rem;
+      box-shadow:0 5px 20px rgba(0,200,255,.5);
+      transition:.3s;animation:pulse 2s infinite;
+    }
+    .telegram a:hover{background:linear-gradient(135deg,#0072ff,#00c6ff);transform:scale(1.05);}
+    .telegram a svg{width:22px;height:22px;fill:#fff;}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,200,255,.7);}70%{box-shadow:0 0 0 20px rgba(0,200,255,0);}100%{box-shadow:0 0 0 0 rgba(0,200,255,0);}}
+  </style>
+</head>
+<body>
+  <div class="header">ASIA CUP 2025</div>
+
+  <div class="buttons-row">
+    <button class="btn active" data-channel="HINDI">HINDI</button>
+    <button class="btn" data-channel="ENGLISH">ENGLISH</button>
+    <button class="btn" data-channel="TAMIL">TAMIL</button>
+    <button class="btn" data-channel="TELUGU">TELUGU</button>
+  </div>
+
+  <div class="player">
+    <iframe id="streamIframe" 
+            src="https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_3500.m3u8" 
+            allow="autoplay; fullscreen" 
+            allowfullscreen
+            autoplay>
+    </iframe>
+  </div>
+
+  <!-- Banner Ads -->
+  <div class="banner-ads">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '1d8f4a5a96607517e224578e3649c10e',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//staunchtownsegg.com/1d8f4a5a96607517e224578e3649c10e/invoke.js"></script>
+  </div>
+
+  <div class="telegram">
+    <a href="https://t.me/allinone_reborn" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><path d="M120 0C53.73 0 0 53.73 0 120c0 66.27 53.73 120 120 120s120-53.73 120-120C240 53.73 186.27 0 120 0zm58.79 82.16l-20.27 95.58c-1.53 6.74-5.56 8.4-11.27 5.23l-31.11-22.97-15.01 14.45c-1.66 1.66-3.05 3.05-6.23 3.05l2.23-31.67 57.62-52.06c2.51-2.23-.55-3.48-3.9-1.26l-71.24 44.8-30.63-9.58c-6.66-2.08-6.74-6.66 1.39-9.9l119.69-46.21c5.56-2.08 10.41 1.39 8.64 9.02z"/></svg>
+      Join Telegram
+    </a>
+  </div>
+
+  <script>
+    const streamLinks = {
+      HINDI: "https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_3500.m3u8",
+      ENGLISH: "https://tataplay.slivcdn.com/hls/live/2020593/SONYSIXHD/master_3500.m3u8",
+      TAMIL: "https://tataplay.slivcdn.com/hls/live/2020437/ten4sd/master_3500.m3u8",
+      TELUGU: "https://tataplay.slivcdn.com/hls/live/2020589/ten4hd/master_3500.m3u8"
+    };
+
+    let currentChannel = "HINDI"; // default
+    let wakeLock = null;
+
+    // Request Wake Lock
+    async function requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request("screen");
+          console.log("Wake Lock enabled");
+          wakeLock.addEventListener("release", () => {
+            console.log("Wake Lock released");
+          });
+        }
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    }
+
+    // Auto re-acquire wake lock if lost
+    document.addEventListener("visibilitychange", () => {
+      if (wakeLock !== null && document.visibilityState === "visible") {
+        requestWakeLock();
+      }
+    });
+
+    // Set default stream
+    document.getElementById("streamIframe").src = streamLinks[currentChannel];
+
+    // Handle button clicks
+    document.querySelectorAll(".btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentChannel = btn.dataset.channel;
+        document.getElementById("streamIframe").src = streamLinks[currentChannel];
+      });
+    });
+
+    // Enable Wake Lock on page load
+    window.addEventListener("load", () => {
+      requestWakeLock();
+    });
+  </script>
+</body>
+</html>
